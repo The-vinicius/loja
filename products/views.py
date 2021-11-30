@@ -7,3 +7,4 @@ from .models import Product
 class ProductListView(ListView):
     #traz todos os produtos do banco de dados sem filtrar nada 
     queryset = Product.objects.all()
+    template_name = "products/list.html"
