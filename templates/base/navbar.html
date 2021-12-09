@@ -1,25 +1,37 @@
+
+{% url 'home' as home_url %}
+{% url 'contact' as contact_url %}
+{% url 'products:list' as products_list_url %}
+{% url 'login' as login_url %}
+{% url 'register' as register_url %}
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="{% url 'home' %}">{% if nome_da_marca %} {{ nome_da_marca }} {% else %} C&oacute;digo Fluente eCommerce {% endif %}</a>
+  <a class="navbar-brand" href="{{ home_url }}">{% if nome_da_marca %} {{ nome_da_marca }} {% else %} C&oacute;digo Fluente eCommerce {% endif %}</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item {% if request.path == home_url %} active {% endif %}">
+        <a class="nav-link" href="{{ home_url }}">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'contact' %}">Contato</a>
+      <li class="nav-item {% if request.path == contact_url %} active {% endif %}">
+        <a class="nav-link" href="{{ contact_url }}">Contato</a>
       </li>
-      <liclass="nav-item">
-        <a class="nav-link" href="{% url 'products:list' %}">Produtos</a>
+      <li class="nav-item {% if request.path == products_list_url %} active {% endif %}">
+        <a class="nav-link" href="{{ products_list_url }}">Produtos</a>
       </li>
-      <li class="nav-item"> 
-        <a class="nav-link" href="{% url 'login' %}">Login</a> 
-      </li> 
-      <li class="nav-item"> 
-        <a class="nav-link" href="{% url 'register' %}">Registrar-se</a> 
+      {% if request.user.is_authenticated %}
+      <li class="nav-item {% if request.path == login_url %} active {% endif %}"> 
+        <a class="nav-link" href="{{ login_url }}">Logout</a> 
       </li>
+      {% else %}
+      <li class="nav-item {% if request.path == login_url %} active {% endif %}">
+        <a class="nav-link" href="{{ login_url }}">Login</a>
+      </li>
+      <li class="nav-item {% if request.path == register %} active {% endif %}"> 
+        <a class="nav-link" href="{{ register_url }}">Registrar-se</a> 
+      </li>
+    {% endif %}
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
