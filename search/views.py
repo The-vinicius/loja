@@ -12,14 +12,14 @@ class SearchProductView(ListView):
         #SearchQuery.objects.create(query=query)
         return context
 
-
+        
     def get_queryset(self, *args, **kargs):
         request = self.request
         print('Solicitação', request)
         result = request.GET
-        print('Resultado:', result)
-        query = result.get('q', None) # result['q']
+        print('Resultado: ', result)
+        query = result.get('q',  None) # method['q']
         print('Consulta', query)
         if query is not None:
-            return Product.objects.filter(title__iexact = query)
+            return Product.objects.filter(title__contains = query)
         return Product.objects.featured()
