@@ -1,4 +1,3 @@
-from django.db.models import Q
 from django.shortcuts import render
 from django.views.generic import ListView
 from products.models import Product
@@ -22,6 +21,5 @@ class SearchProductView(ListView):
         query = result.get('q',  None) # method['q']
         print('Consulta', query)
         if query is not None:
-            lookups = Q(title__contains = query) | Q(description__contains = query)
-            return Product.objects.filter(lookups).distinct()
+            return Product.objects.search(query)
         return Product.objects.featured()
