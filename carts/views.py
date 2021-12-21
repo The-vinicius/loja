@@ -8,10 +8,14 @@ def cart_home(request):
     return render(request, "carts/home.html", {})
 
 def cart_update(request):
-    product_id = 3
-    # Pega o produto com id 3
-    product_obj = Product.objects.get(id=product_id)
-    # Cria ou pega a instância já existente do carrinho
+    print(request.POST)
+    product_id = request.POST.get('product_id')
+    if product_id is not None:
+        try:
+            product_obj = Product.objects.get(id = product_id)
+        except Product.DoesNotExist:
+            print("Mostrar mensagem ao usuário, esse produto acabou!")
+            return redirect("cart:home")
     cart_obj, new_obj = Cart.objects.new_or_get(request)
     if product_obj in cart_obj.products.all():
         cart_obj.products.remove(product_obj) # cart_obj.products.remove(product_id)
