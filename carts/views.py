@@ -8,8 +8,8 @@ def cart_home(request):
     return render(request, "carts/home.html", {})
 
 def cart_update(request):
-    product_id = 5
-    # Pega o produto com id 5
+    product_id = 3
+    # Pega o produto com id 3
     product_obj = Product.objects.get(id=product_id)
     # Cria ou pega a instância já existente do carrinho
     cart_obj, new_obj = Cart.objects.new_or_get(request)
