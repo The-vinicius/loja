@@ -22,7 +22,6 @@ def cart_update(request):
     else:
         # E o produto se adiciona a instância do campo M2M 
         cart_obj.products.add(product_obj) # cart_obj.products.add(product_id)
-    #cart_obj.products.remove(product_obj) # cart_obj.products.remove(product_id)
-    #return redirect(product_obj.get_absolute_url())
+    request.session['cart_items'] = cart_obj.products.count()
     # Vamos usar namespace cart
     return redirect("cart:home")
