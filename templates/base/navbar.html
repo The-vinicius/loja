@@ -39,6 +39,11 @@
         <a class="nav-link" href="{{ register_url }}">Registrar-se</a> 
       </li>
     {% endif %}
+    {% if request.user.is_superuser %}
+      <li class="nav-item">
+        <a class="nav-link" href="http://localhost:8000/admin/"> admin </a>
+      </li>
+    {% endif %}
       <li class="nav-item {% if request.path == cart_url %} active {% endif %}">
         <a class="nav-link" href="{{ cart_url }}">{{ request.session.cart_items }} <i class="fa fa-shopping-cart"></i></a>
       </li>
