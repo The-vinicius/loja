@@ -18,6 +18,7 @@ from django.conf.urls.static import static
 
 
 from django.contrib import admin
+from django.contrib.auth.views import LogoutView
 from django.urls import path , include
 from django.views.generic import TemplateView
 from carts.views import cart_home
@@ -31,7 +32,7 @@ urlpatterns = [
     path('cart/', include("carts.urls", namespace="cart")),
     path('cart/', cart_home, name='cart'),
     path('login/', login_page, name='login'),
-    path('logout/', logout_page, name='logout'),
+    path('logout/', LogoutView.as_view(), name='logout'),
     path('register/', register_page, name='register'),
     path('bootstrap/', TemplateView.as_view(template_name='bootstrap/example.html')),
     path('products/', include("products.urls", namespace="products")),
