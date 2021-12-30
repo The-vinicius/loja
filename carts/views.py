@@ -52,6 +52,7 @@ def checkout_home(request):
         "object": order_obj,
         "billing_profile": billing_profile,
         "login_form": login_form,
-        "guest_form": guest_form
+        "guest_form": guest_form,
+        "address_form": address_form
     }
     return render(request, "carts/checkout.html", context)
