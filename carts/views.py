@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from accounts.forms import LoginForm, GuestForm
+from addresses.forms import AddressForm
 from accounts.models import GuestEmail
 from billing.models import BillingProfile
 from orders.models import Order
@@ -36,11 +37,11 @@ def checkout_home(request):
     #ou se o carrinho já existir mas não tiver nada dentro
     if cart_created or cart_obj.products.count() == 0:
         return redirect("cart:home")
-    #aqui a order associada ao carrinho
-    user = request.user
-    billing_profile = None
+
     login_form = LoginForm()
     guest_form = GuestForm()
+    address_form = AddressForm()
+
     guest_email_id = request.session.get('guest_email_id')
     billing_profile, billing_profile_created = BillingProfile.objects.new_or_get(request)
 
