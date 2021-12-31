@@ -20,6 +20,8 @@ def checkout_address_create_view(request):
             instance.billing_profile = billing_profile
             instance.address_type = request.POST.get('address_type', 'shipping')
             instance.save()
+            request.session[address_type + "_address_id"] = instance.id
+            print(address_type + "_address_id")
         else:
             print("Error here")
             return redirect("cart:checkout")
