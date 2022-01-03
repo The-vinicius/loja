@@ -26,8 +26,7 @@
       </div>
       <div class='col-6'>
         {% url 'checkout_address_reuse' as checkout_address_reuse %}
-        {% include 'addresses/prev_addresses.html' with address_qs=address_qs next_url=request.build_absolute_uri
-        address_type='shipping' action_url=checkout_address_reuse %}
+        {% include 'addresses/prev_addresses.html' with address_qs=address_qs next_url=request.build_absolute_uri address_type='shipping' action_url=checkout_address_reuse %}
       </div>
   </div>
   {% elif not object.billing_address %}
